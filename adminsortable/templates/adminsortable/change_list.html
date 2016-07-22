@@ -37,21 +37,23 @@
 {% endblock %}
 
 {% block content_title %}
-	<h1>
-    	{% if sort_type %}
-    	{% blocktrans with opts.verbose_name_plural|capfirst as model %}Drag and drop {{ sort_type }} {{ model }} to change their order.{% endblocktrans %}
-    	{% else %}
-    	{% blocktrans with opts.verbose_name_plural|capfirst as model %}Drag and drop {{ model }} to change their order.{% endblocktrans %}
-    	{% endif %}
-	</h1>
-	{% if sortable_by_class_is_sortable %}
-	<p class="sortable-help-text">
-	{% blocktrans %}You may also drag and drop {{ sortable_by_class_display_name }} to change their order.{% endblocktrans %}
-	</p>
-	{% endif %}
+<span class="navbar-brand">
+    {% if sort_type %}
+    {% blocktrans with opts.verbose_name_plural|capfirst as model %}Drag and drop {{ sort_type }} {{ model }} to change their order.{% endblocktrans %}
+    {% else %}
+    {% blocktrans with opts.verbose_name_plural|capfirst as model %}Drag and drop {{ model }} to change their order.{% endblocktrans %}
+    {% endif %}
+</span>
 {% endblock %}
 
 {% block content %}
+
+    {% if sortable_by_class_is_sortable %}
+    <p class="sortable-help-text navbar-text navbar-right">
+    {% blocktrans %}You may also drag and drop {{ sortable_by_class_display_name }} to change their order.{% endblocktrans %}
+    </p>
+    {% endif %}
+
 	<div id="content-main">
 		{% block object-tools %}{% endblock %}
 

@@ -26,6 +26,11 @@
         <a href="../../"> {{ app_label|capfirst }} </a>
     </li>
     <li>
+        <a href="../">
+            {% blocktrans with opts.verbose_name_plural|capfirst as model %}{{ model }}{% endblocktrans %}
+        </a>
+    </li>
+    <li>
       	{% trans 'Reorder' %}
     </li>
 </ul>
@@ -48,15 +53,8 @@
 
 {% block content %}
 	<div id="content-main">
-		{% block object-tools %}
-	        <ul class="object-tools">
-	            <li>
-                    <a href="../">
-                    {% blocktrans with opts.verbose_name_plural|capfirst as model %}Return to {{ model }}{% endblocktrans %}
-                    </a>
-                </li>
-	        </ul>
-	    {% endblock %}
+		{% block object-tools %}{% endblock %}
+
 		{% if objects %}
 		<div id="sortable">
 			{% if group_expression %}

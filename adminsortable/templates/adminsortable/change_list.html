@@ -20,17 +20,15 @@
 {% block title %}{% blocktrans with opts.verbose_name_plural|capfirst as model %}Drag and drop {{ model }} to change display order{% endblocktrans %} | {% trans 'Django site admin' %}{% endblock %}
 
 {% block breadcrumbs %}
-    <div class="breadcrumbs">
-      <a href="../../../">
-        {% trans "Home" %}
-      </a>
-       &rsaquo;
-       <a href="../../">
-         {{ app_label|capfirst }}
-      </a>
-      &rsaquo;
+<ul class="breadcrumb">
+    <li><a href="../../../"> {% trans "Home" %} </a></li>
+    <li>
+        <a href="../../"> {{ app_label|capfirst }} </a>
+    </li>
+    <li>
       	{% trans 'Reorder' %}
-    </div>
+    </li>
+</ul>
 {% endblock %}
 
 {% block content_title %}

@@ -20,45 +20,43 @@
 {% block title %}{% blocktrans with opts.verbose_name_plural|capfirst as model %}Drag and drop {{ model }} to change display order{% endblocktrans %} | {% trans 'Django site admin' %}{% endblock %}
 
 {% block breadcrumbs %}
-    <div class="breadcrumbs">
-      <a href="../../../">
-        {% trans "Home" %}
-      </a>
-       &rsaquo;
-       <a href="../../">
-         {{ app_label|capfirst }}
-      </a>
-      &rsaquo;
+<ul class="breadcrumb">
+    <li><a href="../../../"> {% trans "Home" %} </a></li>
+    <li>
+        <a href="../../"> {{ app_label|capfirst }} </a>
+    </li>
+    <li>
+        <a href="../">
+            {% blocktrans with opts.verbose_name_plural|capfirst as model %}{{ model }}{% endblocktrans %}
+        </a>
+    </li>
+    <li>
       	{% trans 'Reorder' %}
-    </div>
+    </li>
+</ul>
 {% endblock %}
 
 {% block content_title %}
-	<h1>
-    	{% if sort_type %}
-    	{% blocktrans with opts.verbose_name_plural|capfirst as model %}Drag and drop {{ sort_type }} {{ model }} to change their order.{% endblocktrans %}
-    	{% else %}
-    	{% blocktrans with opts.verbose_name_plural|capfirst as model %}Drag and drop {{ model }} to change their order.{% endblocktrans %}
-    	{% endif %}
-	</h1>
-	{% if sortable_by_class_is_sortable %}
-	<p class="sortable-help-text">
-	{% blocktrans %}You may also drag and drop {{ sortable_by_class_display_name }} to change their order.{% endblocktrans %}
-	</p>
-	{% endif %}
+<span class="navbar-brand">
+    {% if sort_type %}
+    {% blocktrans with opts.verbose_name_plural|capfirst as model %}Drag and drop {{ sort_type }} {{ model }} to change their order.{% endblocktrans %}
+    {% else %}
+    {% blocktrans with opts.verbose_name_plural|capfirst as model %}Drag and drop {{ model }} to change their order.{% endblocktrans %}
+    {% endif %}
+</span>
 {% endblock %}
 
 {% block content %}
+
+    {% if sortable_by_class_is_sortable %}
+    <p class="sortable-help-text navbar-text navbar-right">
+    {% blocktrans %}You may also drag and drop {{ sortable_by_class_display_name }} to change their order.{% endblocktrans %}
+    </p>
+    {% endif %}
+
 	<div id="content-main">
-		{% block object-tools %}
-	        <ul class="object-tools">
-	            <li>
-                    <a href="../">
-                    {% blocktrans with opts.verbose_name_plural|capfirst as model %}Return to {{ model }}{% endblocktrans %}
-                    </a>
-                </li>
-	        </ul>
-	    {% endblock %}
+		{% block object-tools %}{% endblock %}
+
 		{% if objects %}
 		<div id="sortable">
 			{% if group_expression %}
